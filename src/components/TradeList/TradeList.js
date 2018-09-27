@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Table, Tag } from "antd";
-
+import { Card, Table, Tag, Icon } from "antd";
+import "./TradeList.css";
 import data from "./mock.js";
 
 export default class TradeList extends Component {
@@ -32,9 +32,7 @@ export default class TradeList extends Component {
         key: "operation",
         sorter: true,
         align: "center",
-        render: op => (
-          <span style={{ color: op === "buy" ? "green" : "red" }}>{op} </span>
-        ) //<Tag color={op === "buy" ? "green" : "red"}>{op}</Tag>
+        render: op => <span style={{ color: op === "buy" ? "green" : "red" }}>{op} </span> //<Tag color={op === "buy" ? "green" : "red"}>{op}</Tag>
       },
       {
         title: "Amount",
@@ -66,14 +64,36 @@ export default class TradeList extends Component {
     ];
 
     return (
-      <Table
-        columns={columns}
-        dataSource={data}
-        pagination={false}
-        loading={false}
-        onChange={this.handleChange}
-        size="middle"
-      />
+      <Card
+        className="trade-list__container"
+        bodyStyle={{ padding: "12px 32px 22px 32px" }}
+        extra={
+          <div>
+            Volume Weighted Stock Price* : &nbsp; <Tag color="purple"> 35.15 </Tag>
+          </div>
+        }
+        title={
+          <span style={{ fontSize: "1.2em" }}>
+            <Icon type="swap" theme="outlined" /> &nbsp; Transactions
+          </span>
+        }
+      >
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{
+            defaultPageSize: 4,
+            hideOnSinglePage: true,
+            simple: true
+          }}
+          loading={false}
+          onChange={this.handleChange}
+          size="middle"
+        />
+        <span className="trade-list__vwsp--clarification">
+          *Volume Weighted Stock Price is based on trades made on past 5 minutes
+        </span>
+      </Card>
     );
   }
 }

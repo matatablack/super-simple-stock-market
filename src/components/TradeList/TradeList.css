@@ -1,0 +1,13 @@
+.trade-list__container {
+  height: 390px;
+}
+
+.trade-list__vwsp--clarification {
+  font-style: italic;
+  margin-top: 1em;
+  display: inline-block;
+  font-size: 0.9em;
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+}

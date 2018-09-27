@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Card, Row, Col, Button, InputNumber } from "antd";
-import { Tabs } from "antd";
-import { Input } from "antd";
-const { Meta } = Card;
+import { Card, Row, Col, Button, Tabs, Input, Divider, Tag } from "antd";
+import "./OperationPanel.css";
 
 const TabPane = Tabs.TabPane;
 
@@ -26,34 +24,12 @@ export default class OperationPanel extends Component {
     this.setState({ activeTab: key });
   };
 
-  getContent = () => {
-    return (
-      <Fragment>
-        <Row type="flex" justify="center">
-          <Col span={22} style={{ marginBottom: ".35em" }}>
-            Price
-          </Col>
-          <Col span={22}>
-            <Input addonBefore={"$"} size="large" />
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col span={22} style={{ marginBottom: ".35em" }}>
-            Quantity
-          </Col>
-          <Col span={22}>
-            <Input addonBefore={"#"} size="large" />
-          </Col>
-        </Row>
-      </Fragment>
-    );
-  };
-
   render() {
     return (
       <Card
         style={{ width: "100%" }}
         bodyStyle={{ padding: "0px 10px 10px 10px" }}
+        className="operation-panel"
       >
         <Tabs
           defaultActiveKey={tabs[0].key}
@@ -63,26 +39,55 @@ export default class OperationPanel extends Component {
           tabBarStyle={{ display: "flex", justifyContent: "space-around" }}
         >
           {tabs.map(tab => (
-            <TabPane tab={tab.name} key={tab.key}>
-              {this.getContent()}
-            </TabPane>
+            <TabPane tab={tab.name} key={tab.key} />
           ))}
         </Tabs>
         <Row type="flex" justify="center">
+          <Col span={22} className="operation-panel__input--margin">
+            Price
+          </Col>
           <Col span={22}>
-            <Meta
-              title="Dividend Yield"
-              description="This is the description"
-            />
-            <Meta title="P/E Ratio" description="This is the description" />
+            <Input addonBefore={"$"} size="large" />
           </Col>
         </Row>
-        <Button
-          type="primary"
-          block
-          style={{ textTransform: "capitalize", margin: "1em 0 .5em 0" }}
-          size="large"
-        >
+        <Row type="flex" justify="center">
+          <Col span={22} className="operation-panel__input--margin">
+            Quantity
+          </Col>
+          <Col span={22}>
+            <Input addonBefore={"#"} size="large" />
+          </Col>
+        </Row>
+        <Divider />
+        <Row type="flex" justify="center">
+          <Col span={20}>
+            <Row>
+              <Col span={17}>
+                <span className="operation-panel__info-title">Dividend Yield: </span>
+              </Col>
+              <Col span={7}>
+                <span className="operation-panel__info-value"> 358.25 </span>
+              </Col>
+            </Row>
+          </Col>
+          <Divider />
+          <Col span={20}>
+            <Col span={17}>
+              <span className="operation-panel__info-title">P/E Ratio: </span>
+            </Col>
+            <Col span={7}>
+              <span className="operation-panel__info-value"> 3.25 </span>
+            </Col>
+          </Col>
+        </Row>
+        <Divider />
+        <Row type="flex" justify="center">
+          <Col span={14}>Total:</Col>
+          <Col span={7}>
+            <b>$548.185,35</b>
+          </Col>
+        </Row>
+        <Button type="primary" block size="large" className="operation-panel__action-button">
           {`${this.state.activeTab} now `}
         </Button>
       </Card>
