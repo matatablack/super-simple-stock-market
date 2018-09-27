@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Card, Row, Col, Button, Tabs, Input, Divider, Tag } from "antd";
+import React, { Component } from "react";
+import { Card, Row, Col, Button, Tabs, Input, Divider } from "antd";
 import "./OperationPanel.css";
 
 const TabPane = Tabs.TabPane;
@@ -63,7 +63,9 @@ export default class OperationPanel extends Component {
           <Col span={20}>
             <Row>
               <Col span={17}>
-                <span className="operation-panel__info-title">Dividend Yield: </span>
+                <span className="operation-panel__info-title">
+                  Dividend Yield:{" "}
+                </span>
               </Col>
               <Col span={7}>
                 <span className="operation-panel__info-value"> 358.25 </span>
@@ -87,7 +89,12 @@ export default class OperationPanel extends Component {
             <b>$548.185,35</b>
           </Col>
         </Row>
-        <Button type="primary" block size="large" className="operation-panel__action-button">
+        <Button
+          type="primary"
+          block
+          size="large"
+          className="operation-panel__action-button"
+        >
           {`${this.state.activeTab} now `}
         </Button>
       </Card>

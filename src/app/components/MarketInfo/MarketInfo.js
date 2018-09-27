@@ -38,8 +38,9 @@ export default class MarketInfo extends Component {
         }
       >
         <p>
-          The Global Beverage Corporation Exchange is the leading stock market trading in drinks
-          companies. To start operating please select a stock...
+          The Global Beverage Corporation Exchange is the leading stock market
+          trading in drinks companies. To start operating please select a
+          stock...
         </p>
         <Select
           showSearch
@@ -50,12 +51,13 @@ export default class MarketInfo extends Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
+            0
           }
         >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
+          <Option value="jack">TEA</Option>
+          <Option value="lucy">POA</Option>
+          <Option value="tom">IDK</Option>
         </Select>
         &nbsp;&nbsp;
         <Icon type="right" theme="outlined" />
