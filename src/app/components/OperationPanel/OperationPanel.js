@@ -16,15 +16,26 @@ const OperationPanel = ({
   quantity
 }) => {
   return (
-    <Card bodyStyle={{ padding: "0px 10px 10px 10px" }} className="operation-panel">
+    <Card
+      bodyStyle={{ padding: "0px 10px 10px 10px" }}
+      className="operation-panel"
+    >
       <Tabs onChange={handleTabChange} size="large" tabBarGutter={8}>
         {["buy", "sell"].map(tab => (
           <Tabs.TabPane tab={tab.toUpperCase()} key={tab} />
         ))}
       </Tabs>
       <form onSubmit={handleSubmit}>
-        <DataInput onChange={handleInputChange} price={price} quantity={quantity} />
-        <DataDisplay peRatio={peRatio} dividendYield={dividendYield} total={price * quantity} />
+        <DataInput
+          onChange={handleInputChange}
+          price={price}
+          quantity={quantity}
+        />
+        <DataDisplay
+          peRatio={peRatio}
+          dividendYield={dividendYield}
+          total={price * quantity}
+        />
         <Button
           type="primary"
           block

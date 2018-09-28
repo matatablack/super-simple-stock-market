@@ -1,5 +1,5 @@
 import React from "react";
-import { Tag, Icon, Row, Col } from "antd";
+import { Icon } from "antd";
 import { withActions } from "./../../index";
 
 export default withActions(({ selectedSymbol, ...props }) => {
@@ -20,8 +20,14 @@ export default withActions(({ selectedSymbol, ...props }) => {
             alignItems: "center"
           }}
         >
-          <Icon type="right" theme="outlined" style={{ fontSize: "14px" }} />
-          &nbsp;&nbsp; {selectedSymbol.toUpperCase()}{" "}
+          <Icon
+            type="right"
+            theme="outlined"
+            style={{ fontSize: "14px" }}
+            className="fadeInDelay"
+          />
+          &nbsp;&nbsp;
+          <span className="fadeInDelay">{selectedSymbol.toUpperCase()}</span>
           <Icon
             type="close"
             theme="outlined"

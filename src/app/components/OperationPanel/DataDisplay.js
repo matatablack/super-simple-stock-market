@@ -7,16 +7,21 @@ export default function DataDisplay({ dividendYield, peRatio, total }) {
   peRatio = validate(peRatio);
   return (
     <Fragment>
-      <Divider />
-      <Row type="flex" justify="center" align="middle">
+      <Divider className="fadeInDelay2" />
+      <Row type="flex" justify="center" align="middle" className="fadeInDelay2">
         <Col span={20}>
           <Row type="flex" align="middle">
             <Col span={12}>
-              <span className="operation-panel__info-title">Dividend Yield: </span>
+              <span className="operation-panel__info-title">
+                Dividend Yield:{" "}
+              </span>
             </Col>
             <Col span={12}>
               <Row type="flex" justify="end" align="middle">
-                <span className="operation-panel__info-value" title={dividendYield}>
+                <span
+                  className="operation-panel__info-value"
+                  title={dividendYield}
+                >
                   {dividendYield}
                 </span>
               </Row>
@@ -37,8 +42,8 @@ export default function DataDisplay({ dividendYield, peRatio, total }) {
           </Col>
         </Col>
       </Row>
-      <Divider />
-      <Row type="flex" justify="center">
+      <Divider className="fadeInDelay3" />
+      <Row type="flex" justify="center" className="fadeInDelay3">
         <Col span={20}>
           <Row type="flex" justify="space-between">
             <Col span={6}>Total:</Col>

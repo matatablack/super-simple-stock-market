@@ -5,7 +5,9 @@ class Trades {
 
   static getLastTrades(tradeList, minutes = 5) {
     const xMinutesAgo = new Date().getTime() - minutes * 60000;
-    return tradeList.filter(trade => new Date(trade.timestamp).getTime() > xMinutesAgo);
+    return tradeList.filter(
+      trade => new Date(trade.timestamp).getTime() > xMinutesAgo
+    );
   }
 }
 

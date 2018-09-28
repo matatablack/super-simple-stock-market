@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Table, Tag, Icon } from "antd";
+import { Card, Table, Tag } from "antd";
 import "./TradeList.css";
 import getColumns from "./tableColumns";
 import TradeListTitle from "./TradeListTitle";
@@ -21,12 +21,11 @@ export default class TradeList extends Component {
   };
 
   render() {
-    let { sortedInfo, filteredInfo } = this.state;
+    let { sortedInfo } = this.state;
     sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
 
-    const tableColumns = getColumns(sortedInfo, filteredInfo);
     const { tradeList, selectedSymbol } = this.props;
+    const tableColumns = getColumns(sortedInfo, tradeList);
 
     return (
       <Card
@@ -34,10 +33,13 @@ export default class TradeList extends Component {
         bodyStyle={{ padding: "12px 32px 22px 32px" }}
         extra={
           selectedSymbol && (
-            <div>
+            <div className="fadeIn">
               Volume Weighted Stock Price* : &nbsp;{" "}
-              <Tag color="purple">
-                {Stock.getVolumeWeightedStockPrice(tradeList, selectedSymbol).toFixed(2)}
+              <Tag color="blue">
+                {Stock.getVolumeWeightedStockPrice(
+                  tradeList,
+                  selectedSymbol
+                ).toFixed(2)}
               </Tag>
             </div>
           )
@@ -45,9 +47,12 @@ export default class TradeList extends Component {
         title={<TradeListTitle selectedSymbol={selectedSymbol} />}
       >
         <Table
+          className="fadeInDelay"
           columns={tableColumns}
           dataSource={
-            selectedSymbol ? tradeList.filter(trade => trade.symbol === selectedSymbol) : tradeList
+            selectedSymbol
+              ? tradeList.filter(trade => trade.symbol === selectedSymbol)
+              : tradeList
           }
           pagination={{
             defaultPageSize: 4,
@@ -58,6 +63,7 @@ export default class TradeList extends Component {
           onChange={this.handleChange}
           size="middle"
           rowKey="timestamp"
+          rowClassName={(record, index) => "fadeInDelayShort"}
         />
         <span className="trade-list__vwsp--clarification">
           *Volume Weighted Stock Price is based on trades made on past 5 minutes
@@ -67,18 +73,15 @@ export default class TradeList extends Component {
   }
 }
 
-/* TradeList.propTypes = {
+TradeList.propTypes = {
   selectedSymbol: PropTypes.string,
-  tradeList: PropTypes.oneOf([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        symbol: PropTypes.string.isRequired,
-        operation: PropTypes.oneOf(["buy", "sell"]).isRequired,
-        price: PropTypes.number.isRequired,
-        quantity: PropTypes.number.isRequired,
-        timestamp: PropTypes.string.isRequired
-      })
-    ),
-    []
-  ])
-}; */
+  tradeList: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string.isRequired,
+      operation: PropTypes.oneOf(["buy", "sell"]).isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
+      timestamp: PropTypes.number.isRequired
+    })
+  )
+};

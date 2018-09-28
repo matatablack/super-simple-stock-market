@@ -57,6 +57,8 @@
 .operation-panel__action-button {
   text-transform: capitalize;
   margin: 1em 0 0.5em 0;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out 0.9s forwards;
 }
 
 .operation-panel input {
@@ -64,16 +66,5 @@
 }
 
 .operation-panel {
-  animation: fadeInLeft 0.3s ease-in;
-}
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  animation: fadeInLeft 0.6s ease-in;
 }

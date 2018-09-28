@@ -5,7 +5,7 @@ import { Row, Col, Input } from "antd";
 export default function DataInput({ onChange, quantity, price }) {
   return (
     <Fragment>
-      <Row type="flex" justify="center">
+      <Row type="flex" justify="center" className="fadeInDelay">
         <Col span={22} className="operation-panel__input--margin">
           Price
         </Col>
@@ -22,7 +22,7 @@ export default function DataInput({ onChange, quantity, price }) {
           />
         </Col>
       </Row>
-      <Row type="flex" justify="center">
+      <Row type="flex" justify="center" className="fadeInDelay2">
         <Col span={22} className="operation-panel__input--margin">
           Quantity
         </Col>

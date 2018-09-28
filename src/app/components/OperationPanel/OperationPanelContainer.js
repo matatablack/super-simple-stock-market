@@ -13,16 +13,26 @@ class OperationPanelContainer extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { price, quantity, operation } = this.state;
-    this.props.actions.addTrade({
-      symbol: this.props.selectedSymbol,
-      operation,
-      price,
-      quantity,
-      timestamp: new Date().getTime()
-    });
+    if (this.props.selectedSymbol) {
+      this.props.actions.addTrade({
+        symbol: this.props.selectedSymbol,
+        operation,
+        price,
+        quantity,
+        timestamp: new Date().getTime()
+      });
+
+      this.setState({
+        price: null,
+        quantity: null
+      });
+    } else {
+      this.props.actions.submitWithoutSymbol();
+    }
   };
 
-  handleInputChange = ({ target: { name, value } }) => this.setState({ [name]: Number(value) });
+  handleInputChange = ({ target: { name, value } }) =>
+    this.setState({ [name]: Number(value) });
 
   handleTabChange = operation => this.setState({ operation });
 
