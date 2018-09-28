@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Card, Icon, Tag, Select, Divider, Tooltip } from "antd";
 import "./MarketInfo.css";
 import { withActions } from "./../../index";
