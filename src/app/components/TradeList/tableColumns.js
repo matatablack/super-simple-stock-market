@@ -1,21 +1,24 @@
 import React from "react";
 
-export default function getColumns(sortedInfo) {
+export default function getColumns(sortedInfo, filteredInfo) {
   return [
     {
       title: "Symbol",
       dataIndex: "symbol",
       key: "symbol",
-      render: text => <a href="javascript:;">{text.toUpperCase()}</a>
+      sorter: true,
+      sorter: (a, b) => a.symbol.localeCompare(b.symbol),
+      sortOrder: sortedInfo.columnKey === "symbol" && sortedInfo.order,
+      render: text => <span style={{ color: "#1890ff" }}>{text.toUpperCase()}</span>
     },
     {
       title: "Operation",
       dataIndex: "operation",
       key: "operation",
       align: "center",
-      render: op => (
-        <span style={{ color: op === "buy" ? "green" : "red" }}>{op} </span>
-      )
+      sorter: (a, b) => a.operation.localeCompare(b.operation),
+      sortOrder: sortedInfo.columnKey === "operation" && sortedInfo.order,
+      render: op => <span style={{ color: op === "buy" ? "#5bbf5b" : "#f06767" }}>{op} </span>
     },
     {
       title: "Amount",
@@ -39,7 +42,10 @@ export default function getColumns(sortedInfo) {
       title: "Time",
       key: "timestamp",
       dataIndex: "timestamp",
-      align: "center"
+      align: "center",
+      sorter: (a, b) => a.timestamp - b.timestamp,
+      sortOrder: sortedInfo.columnKey === "timestamp" && sortedInfo.order,
+      render: epoch => <span>{new Date(epoch).toLocaleString()}</span>
     }
   ];
 }

@@ -1,6 +1,6 @@
 import Header from "./Header";
 import TradeList from "./TradeList/TradeList";
-import OperationPanel from "./OperationPanel/OperationPanel";
+import OperationPanel from "./OperationPanel/OperationPanelContainer";
 import MarketInfo from "./MarketInfo/MarketInfo";
 import PoweredBy from "./PoweredBy";
 

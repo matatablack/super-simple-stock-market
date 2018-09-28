@@ -1,3 +1,7 @@
+.operation-panel {
+  width: 100%;
+}
+
 .operation-panel__info-title {
   font-size: 1.1em;
   display: inline-block;
@@ -17,6 +21,10 @@
   font-size: 15px;
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .operation-panel__input--margin {
@@ -49,4 +57,23 @@
 .operation-panel__action-button {
   text-transform: capitalize;
   margin: 1em 0 0.5em 0;
+}
+
+.operation-panel input {
+  /* text-align: right; */
+}
+
+.operation-panel {
+  animation: fadeInLeft 0.3s ease-in;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

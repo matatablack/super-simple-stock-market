@@ -1,69 +1,65 @@
-import React, { Component } from "react";
+import React, { Fragment } from "react";
 import { Card, Icon, Tag, Select, Divider } from "antd";
 import "./MarketInfo.css";
+import { withActions } from "./../../index";
+import Stock from "../../../utils/Stock";
 
 const Option = Select.Option;
 
-export default class MarketInfo extends Component {
-  state = {
-    selectedStock: null
-  };
-
-  handleChange(value) {
-    console.log(`selected ${value}`);
-  }
-
-  handleBlur() {
-    console.log("blur");
-  }
-
-  handleFocus() {
-    console.log("focus");
-  }
-
-  render() {
-    return (
-      <Card
-        className="market-info__container"
-        bodyStyle={{ padding: "12px 32px 22px 32px", minHeight: "" }}
-        extra={
-          <div>
-            All Share Index : &nbsp; <Tag color="blue"> 35.15 </Tag>
-          </div>
+export default withActions(({ selectedSymbol, ...props }) => {
+  const symbol = selectedSymbol && Stock.get(selectedSymbol);
+  return (
+    <Card
+      className="market-info__container"
+      bodyStyle={{ padding: "12px 32px 22px 32px", minHeight: "" }}
+      extra={
+        <div>
+          All Share Index : &nbsp; <Tag color="blue"> 35.15 </Tag>
+        </div>
+      }
+      title={
+        <span className="market-info__title">
+          <Icon type="stock" theme="outlined" /> &nbsp; Market information
+        </span>
+      }
+    >
+      <p>
+        The Global Beverage Corporation Exchange is the leading stock market trading in drinks
+        companies. To start operating please select a stock...
+      </p>
+      <Select
+        showSearch
+        style={{ width: 200 }}
+        placeholder="Search..."
+        optionFilterProp="children"
+        onChange={props.actions.selectStockSymbol}
+        filterOption={(input, option) =>
+          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
-        title={
-          <span style={{ fontSize: "1.2em" }}>
-            <Icon type="stock" theme="outlined" /> &nbsp; Market information
-          </span>
-        }
+        value={selectedSymbol}
+        allowClear={true}
       >
-        <p>
-          The Global Beverage Corporation Exchange is the leading stock market
-          trading in drinks companies. To start operating please select a
-          stock...
-        </p>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Symbol..."
-          optionFilterProp="children"
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
-            0
-          }
-        >
-          <Option value="jack">TEA</Option>
-          <Option value="lucy">POA</Option>
-          <Option value="tom">IDK</Option>
-        </Select>
-        &nbsp;&nbsp;
-        <Icon type="right" theme="outlined" />
-        &nbsp;&nbsp; Type: common <Divider type="vertical" /> Par Value: 200{" "}
-        <Divider type="vertical" /> Last Dividend: 8
-      </Card>
-    );
-  }
-}
+        {Stock.getSymbols().map(symbol => (
+          <Option value={symbol} key={symbol}>
+            {symbol.toUpperCase()}
+          </Option>
+        ))}
+      </Select>
+      {symbol && (
+        <Fragment>
+          &nbsp;&nbsp;
+          <Icon type="caret-right" theme="outlined" />
+          &nbsp;&nbsp;
+          <b>Type </b> &nbsp; <Icon type="right" theme="outlined" style={{ fontSize: ".6em" }} />
+          &nbsp;
+          {symbol.type} <Divider type="vertical" /> <b> Par Value </b> &nbsp;
+          <Icon type="right" theme="outlined" style={{ fontSize: ".6em" }} /> &nbsp;
+          {symbol.parValue}
+          <Divider type="vertical" /> <b>Last Dividend </b> &nbsp;
+          <Icon type="right" theme="outlined" style={{ fontSize: ".6em" }} /> &nbsp;
+          {symbol.lastDividend}
+        </Fragment>
+      )}
+    </Card>
+  );
+});

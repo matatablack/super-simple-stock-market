@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card, Table, Tag, Icon } from "antd";
 import "./TradeList.css";
-import data from "./mock.js";
 import getColumns from "./tableColumns";
+import TradeListTitle from "./TradeListTitle";
 
 export default class TradeList extends Component {
   state = {
-    sortedInfo: null
+    sortedInfo: {
+      columnKey: "timestamp",
+      order: "descend"
+    }
   };
 
   handleChange = (pagination, filters, sorter) => {
@@ -17,33 +20,31 @@ export default class TradeList extends Component {
   };
 
   render() {
-    let { sortedInfo } = this.state;
+    let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
 
-    const tableColumns = getColumns(sortedInfo);
+    const tableColumns = getColumns(sortedInfo, filteredInfo);
+    const { tradeList, selectedSymbol } = this.props;
 
     return (
       <Card
         className="trade-list__container"
         bodyStyle={{ padding: "12px 32px 22px 32px" }}
         extra={
-          <div>
-            Volume Weighted Stock Price* : &nbsp;{" "}
-            <Tag color="purple"> 35.15 </Tag>
-          </div>
+          selectedSymbol && (
+            <div>
+              Volume Weighted Stock Price* : &nbsp; <Tag color="purple"> 35.15 </Tag>
+            </div>
+          )
         }
-        title={
-          <span style={{ fontSize: "1.2em" }}>
-            <Icon type="swap" theme="outlined" /> &nbsp; Transactions
-            &nbsp;&nbsp;
-            <Icon type="right" theme="outlined" style={{ fontSize: "14px" }} />
-            &nbsp;&nbsp; TEA
-          </span>
-        }
+        title={<TradeListTitle selectedSymbol={selectedSymbol} />}
       >
         <Table
           columns={tableColumns}
-          dataSource={data}
+          dataSource={
+            selectedSymbol ? tradeList.filter(trade => trade.symbol === selectedSymbol) : tradeList
+          }
           pagination={{
             defaultPageSize: 4,
             hideOnSinglePage: true,
@@ -62,7 +63,7 @@ export default class TradeList extends Component {
   }
 }
 
-TradeList.propTypes = {
+/* TradeList.propTypes = {
   selectedSymbol: PropTypes.string,
   tradeList: PropTypes.oneOf([
     PropTypes.arrayOf(
@@ -76,4 +77,4 @@ TradeList.propTypes = {
     ),
     []
   ])
-};
+}; */
