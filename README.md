@@ -12,4 +12,4 @@ JP Morgan Assignment - Super Simple Stock Market Excercise
 
 - Theres is also a demo link to run the app right now in the browser:
 
-[http://github.globant.com/pages/mm-rodriguez/super-simple-stock-market](http://github.globant.com/pages/mm-rodriguez/super-simple-stock-market)
+[https://matatablack.github.io/super-simple-stock-market/](https://matatablack.github.io/super-simple-stock-market/)
