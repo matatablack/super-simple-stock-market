@@ -4,6 +4,7 @@ import { Card, Table, Tag, Icon } from "antd";
 import "./TradeList.css";
 import getColumns from "./tableColumns";
 import TradeListTitle from "./TradeListTitle";
+import Stock from "../../../utils/Stock";
 
 export default class TradeList extends Component {
   state = {
@@ -34,7 +35,10 @@ export default class TradeList extends Component {
         extra={
           selectedSymbol && (
             <div>
-              Volume Weighted Stock Price* : &nbsp; <Tag color="purple"> 35.15 </Tag>
+              Volume Weighted Stock Price* : &nbsp;{" "}
+              <Tag color="purple">
+                {Stock.getVolumeWeightedStockPrice(tradeList, selectedSymbol).toFixed(2)}
+              </Tag>
             </div>
           )
         }

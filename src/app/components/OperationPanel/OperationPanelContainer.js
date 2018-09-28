@@ -22,7 +22,7 @@ class OperationPanelContainer extends Component {
     });
   };
 
-  handleInputChange = ({ target: { name, value } }) => this.setState({ [name]: value });
+  handleInputChange = ({ target: { name, value } }) => this.setState({ [name]: Number(value) });
 
   handleTabChange = operation => this.setState({ operation });
 

@@ -6,7 +6,7 @@ import Stock from "../../../utils/Stock";
 
 const Option = Select.Option;
 
-export default withActions(({ selectedSymbol, ...props }) => {
+export default withActions(({ selectedSymbol, tradeList, ...props }) => {
   const symbol = selectedSymbol && Stock.get(selectedSymbol);
   return (
     <Card
@@ -14,7 +14,8 @@ export default withActions(({ selectedSymbol, ...props }) => {
       bodyStyle={{ padding: "12px 32px 22px 32px", minHeight: "" }}
       extra={
         <div>
-          All Share Index : &nbsp; <Tag color="blue"> 35.15 </Tag>
+          All Share Index : &nbsp;{" "}
+          <Tag color="blue">{Stock.getAllShareIndex(tradeList).toFixed(2)}</Tag>
         </div>
       }
       title={

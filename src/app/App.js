@@ -1,16 +1,10 @@
-import React from "react"; 
+import React from "react";
 import "antd/dist/antd.css";
 import "./App.css";
 
 import { Layout } from "antd";
 
-import {
-  Header,
-  TradeList,
-  OperationPanel,
-  MarketInfo,
-  PoweredBy
-} from "./components";
+import { Header, TradeList, OperationPanel, MarketInfo, PoweredBy } from "./components";
 
 const { Sider, Content } = Layout;
 

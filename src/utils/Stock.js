@@ -25,8 +25,33 @@ class Stock {
     );
   }
 
-  static getVolumeWeightedStockPrice() {
-    return null;
+  static getVolumeWeightedStockPrice(tradeList, symbol) {
+    return Trades.getLastTrades(tradeList)
+      .filter(trade => trade.symbol === symbol)
+      .reduce(
+        (acc, trade, i, arr) => {
+          let { quantity, price } = trade;
+          return {
+            sumTotal: acc.sumTotal + quantity * price,
+            sumQuantity: acc.sumQuantity + quantity,
+            total:
+              (acc.sumTotal + arr[i].price * arr[i].quantity) / (acc.sumQuantity + arr[i].quantity)
+          };
+        },
+        { sumTotal: 0, sumQuantity: 0, total: 0 }
+      ).total;
+  }
+
+  static getAllShareIndex(tradeList) {
+    let symbols = this.getSymbols();
+
+    let result = symbols.reduce((acc, symbol) => {
+      let vwsp = this.getVolumeWeightedStockPrice(tradeList, symbol) || 1;
+      console.log(symbol, vwsp);
+      return acc * vwsp;
+    }, 1);
+    console.log(result);
+    return result;
   }
 }
 
